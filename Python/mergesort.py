@@ -50,6 +50,7 @@ def mergesort(nums):
     R = mergesort(right)
 
     ans = []
+    # Append lower leading digit until both lists added.
     while L and R:
         if L[0] < R[0]:
             ans.append(L.pop(0))
