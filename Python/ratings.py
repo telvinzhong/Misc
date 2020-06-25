@@ -1,6 +1,5 @@
-# I unceremoniously rely on Yelp and wanted a way to know what was actually good.
-# Then I learned Baye's theorem in class and that became my inspiration.
-# It's also good for understanding reviews for things like Coursera and Amazon.
+# Why spend 20 minutes deciding which product t
+# when you can relearn bayesian estimates and program it yourself?
 
 # Telvin Zhong
 # 6/23/2020
@@ -9,11 +8,13 @@ import sys
 count = 1
 
 # Bayesian average is calculated with four variables.
-# Average review and total number of reviews are naturally incorporated.
+# Average review and total number of reviews are two naturally included variables.
 # variable m is the value towards which we nudge services with a small number of reviews.
 # m is also understandable as our best guess as to what the average rating should be.
 # variable C represents how confident we are in the initial data.
 # A smaller value for C will make it harder to move away from our guess value m.
+
+# This version of bayesian avg uses values 3 and 5 for m and C respectively.
 def bayesian_avg(avg, num):
     return (5 * 3 + avg * num) / (5 + num)
 
@@ -63,13 +64,14 @@ def ask_num():
 
 service = []
 
-
 # Change a rating from a 5 star scale to a number between 0 and 1.
 # I thought I would need this but ended up not having to.
 def toPercent(num):
     return (num - 1) / 4
 
+
 def main():
+    
     global count
     print("Welcome to the rating review program.\n")
     while True:
