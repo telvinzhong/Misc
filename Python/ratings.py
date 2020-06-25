@@ -5,14 +5,23 @@
 # Telvin Zhong
 # 6/23/2020
 
-import numpy as np
-
+import sys
 count = 1
-flag = True
-total = []
 
-def sum(n):
-    return n * (n + 1) / 2
+# Bayesian average is calculated with four variables.
+# Average review and total number of reviews are naturally incorporated.
+# variable m is the value towards which we nudge services with a small number of reviews.
+# m is also understandable as our best guess as to what the average rating should be.
+# variable C represents how confident we are in the initial data.
+# A smaller value for C will make it harder to move away from our guess value m.
+def bayesian_avg(avg, num):
+    return (5 * 3 + avg * num) / (5 + num)
+
+def calc_list(lst):
+    for i in lst:
+        print(i[0] + ": ")
+        print("Average Rating: {:.1f}    Total number of reviews: {:d}".format(i[1], i[2]))
+        print("Bayesian adjusted rating: {:.3f}\n".format(bayesian_avg(i[1], i[2])))
 
 def ask_name():
     global count
@@ -35,7 +44,7 @@ def ask_avg():
             print("\nInput not valid. Make sure your rating is between 0 and 5.")
         else:
             break
-    return num
+    return float(num)
 
 def ask_num():
     ans = 0
@@ -50,13 +59,15 @@ def ask_num():
             print("\nInput not valid. Make sure your input greater than zero.")
         else:
             break
-    return ans
+    return int(ans)
 
 service = []
 
 
-def how_happy(entry):
-    return service[entry]
+# Change a rating from a 5 star scale to a number between 0 and 1.
+# I thought I would need this but ended up not having to.
+def toPercent(num):
+    return (num - 1) / 4
 
 def main():
     global count
@@ -66,7 +77,7 @@ def main():
         avg = ask_avg()
         num = ask_num()
 
-        service.extend([name, avg, num])
+        service.append([name, avg, num])
 
         check = input("Type N to continue adding or press P to see results: ")
         if check == "N" or check == "n":
@@ -80,5 +91,15 @@ def main():
             print("Please enter either N or P.\n")
 
     for i in service:
-        print(i)
+        print("For " + i[0] + ": ")
+        print("Bayesian adjusted rating: {:.3f}\n".format(bayesian_avg(i[1], i[2])))
+ 
+test = [["Web Design for Everybody, UMich", 4.7, 29780], ["Full-Stack Web Development, HK University", 4.7, 7257], ["HTML, CSS, and Javascript, John Hopkins", 4.8, 7131]]
+print("Testing with some coursera courses:")
+calc_list(test)
+
+flag = input("Press any key to use this program yourself or press P to exit.")
+if flag == "P" or flag == "p":
+    sys.exit(0)
+
 main()
