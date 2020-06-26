@@ -19,6 +19,7 @@ def bayesian_avg(avg, num):
     return (5 * 3 + avg * num) / (5 + num)
 
 def calc_list(lst):
+    print("_____RESULTS_____")
     for i in lst:
         print(i[0] + ": ")
         print("Average Rating: {:.1f}    Total number of reviews: {:d}".format(i[1], i[2]))
@@ -81,7 +82,7 @@ def main():
 
         service.append([name, avg, num])
 
-        check = input("Type N to continue adding or press P to see results: ")
+        check = input("\nType N to continue adding or press P to see results: ")
         if check == "N" or check == "n":
             count += 1
             print("\n")
@@ -92,9 +93,7 @@ def main():
         else:
             print("Please enter either N or P.\n")
 
-    for i in service:
-        print("For " + i[0] + ": ")
-        print("Bayesian adjusted rating: {:.3f}\n".format(bayesian_avg(i[1], i[2])))
+    calc_list(service)
  
 test = [["Web Design for Everybody, UMich", 4.7, 29780], ["Full-Stack Web Development, HK University", 4.7, 7257], ["HTML, CSS, and Javascript, John Hopkins", 4.8, 7131]]
 print("Testing with some coursera courses:")
