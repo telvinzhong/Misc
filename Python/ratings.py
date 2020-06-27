@@ -18,6 +18,7 @@ count = 1
 def bayesian_avg(avg, num):
     return (5 * 3 + avg * num) / (5 + num)
 
+# Prints given information and the adjusted rating.
 def calc_list(lst):
     print("_____RESULTS_____")
     for i in lst:
