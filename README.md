@@ -1,4 +1,4 @@
 # Projects
-A collection of my personal projects.
+A collection of small projects.
 
 [Click me!!](https://www.youtube.com/watch?v=tas0O586t80)
